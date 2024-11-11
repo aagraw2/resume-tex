@@ -32,15 +32,19 @@
 % \usepackage[sfdefault]{FiraSans}
 % \usepackage[sfdefault]{roboto}
 % \usepackage[default]{sourcesanspro}
-% \setsansfont{Calibri}
 
 % Serif
 % \usepackage{times}
+% \usepackage{CormorantGaramond}
+% \usepackage{charter}
 
-% Calibri
-% \usepackage{fontspec}
-% \setmainfont{Calibri}
+% Helvetica
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}
 
+\usepackage{ragged2e} % Added for justified text
+\setlist[itemize]{label={}, leftmargin=*, before=\justifying} % Adjusted for justified alignment
+\setlist[enumerate]{label={}, leftmargin=*, before=\justifying} % Adjusted for justified alignment
 
 \pagestyle{fancy}
 \fancyhf{} % clear all header and footer fields
@@ -68,7 +72,7 @@
 
 % Sections formatting
 \titleformat{\section}{
-  \vspace{-4pt}\bfseries\raggedright\large
+  \vspace{-4pt}\bfseries\raggedright\Large
 }{}{0em}{}[\color{black}\titlerule \vspace{-5pt}]
 
 % Ensure that generate pdf is machine readable/ATS parsable
@@ -122,7 +126,7 @@
 
 \newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.0in, label={}]}
 \newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
-\newcommand{\resumeItemListStart}{\begin{itemize}}
+\newcommand{\resumeItemListStart}{\begin{itemize}[leftmargin=0.15in, label={\tiny$\bullet$}]}
 \newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-5pt}}
 
 %-------------------------------------------
@@ -137,5 +141,5 @@
 \import{\sectiondir}{4_experience.tex}
 \import{\sectiondir}{5_skills.tex}
 \import{\sectiondir}{6_leadership.tex} 
-
 \end{document}
+
