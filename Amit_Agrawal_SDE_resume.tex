@@ -25,6 +25,7 @@
 \usepackage{multicol}
 \usepackage{import}
 \usepackage{etaremune}
+\usepackage{ifthen}
 
 
 %----------FONT OPTIONS----------
@@ -43,8 +44,8 @@
 \renewcommand{\familydefault}{\sfdefault}
 
 \usepackage{ragged2e} % Added for justified text
-\setlist[itemize]{label={}, leftmargin=*, before=\justifying} % Adjusted for justified alignment
-\setlist[enumerate]{label={}, leftmargin=*, before=\justifying} % Adjusted for justified alignment
+\setlist[itemize]{label={\tiny$\bullet$}, leftmargin=*, topsep=4pt, itemsep=0pt, partopsep=0pt, parsep=0pt, before=\justifying, labelsep=0.3em}
+\setlist[enumerate]{label={}, leftmargin=*, topsep=0pt, itemsep=0pt, partopsep=0pt, parsep=0pt, before=\justifying}
 
 \pagestyle{fancy}
 \fancyhf{} % clear all header and footer fields
@@ -72,8 +73,9 @@
 
 % Sections formatting
 \titleformat{\section}{
-  \vspace{-4pt}\bfseries\raggedright\Large
-}{}{0em}{}[\color{black}\titlerule \vspace{-5pt}]
+  \bfseries\raggedright\large
+}{}{0em}{}[\color{black}\titlerule]
+\titlespacing*{\section}{0pt}{0pt}{4pt}
 
 % Ensure that generate pdf is machine readable/ATS parsable
 \pdfgentounicode=1
@@ -81,53 +83,50 @@
 
 %-------------------------
 % Custom commands
+\newcommand{\debugvspace}[1]{\vspace{#1}\textcolor{red}{\rule{\textwidth}{0.4pt}}}
 
 %%% Configure a directory location for sections
 \newcommand*{\sectiondir}{sections/}
 
-\newcommand{\resumeItem}[1]{
-  \item\small{
-    {#1 \vspace{-2pt}}
-  }
-}
-
-\newcommand{\classesList}[4]{
-    \item\small{
-        {#1 #2 #3 #4 \vspace{-2pt}}
-  }
-}
-
-\newcommand{\resumeSubheading}[4]{
-  \vspace{-2pt}\item
+\newcommand{\resumeSubheading}[2]{
+  \item
     \begin{tabular*}{1.0\textwidth}[t]{l@{\extracolsep{\fill}}r}
-      \textbf{#1} & \textbf{\small #2} \\
-      \textit{\small#3} & \textit{\small #4} \\
-    \end{tabular*}\vspace{-7pt}
+      {\textbf{\small #1}} & {\footnotesize #2}
+    \end{tabular*}
 }
 
-\newcommand{\resumeSubSubheading}[2]{
+\newcommand{\resumeSubSubheading}[2]{%
+  \item
+  \begin{tabular*}{\textwidth}{@{}l@{\extracolsep{\fill}}r@{}}
+    \underline{\footnotesize #1} & {\footnotesize #2}
+  \end{tabular*}
+}
+
+\newcommand{\resumeSubSubheadingSmall}[2]{%
+  \item
+    {\footnotesize #1}
+  \if
+    \relax\detokenize{#2}\relax
+  \else
     \item
-    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
-      \textit{\small#1} & \textit{\small #2} \\
-    \end{tabular*}\vspace{-7pt}
+    {\scriptsize #2}
+  \fi
+  \vspace{2pt}
 }
 
-\newcommand{\resumeProjectHeading}[2]{
-    \item
-    \begin{tabular*}{1.001\textwidth}{l@{\extracolsep{\fill}}r}
-      \small#1 & \textbf{\small #2}\\
-    \end{tabular*}\vspace{-7pt}
+\newcommand{\resumeItem}[1]{
+  \item\footnotesize{
+    {#1}
+  }
 }
 
-\newcommand{\resumeSubItem}[1]{\resumeItem{#1}\vspace{-4pt}}
+\newcommand{\resumeSubItem}[1]{\resumeItem{#1}}
 
-\renewcommand\labelitemi{$\vcenter{\hbox{\tiny$\bullet$}}$}
-\renewcommand\labelitemii{$\vcenter{\hbox{\tiny$\bullet$}}$}
-
-\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.0in, label={}]}
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.0in, label={}, topsep=0pt, itemsep=0pt, partopsep=0pt, parsep=0pt]}
 \newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
-\newcommand{\resumeItemListStart}{\begin{itemize}[leftmargin=0.15in, label={\tiny$\bullet$}]}
-\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-5pt}}
+\newcommand{\resumeItemListStart}{\begin{itemize}[leftmargin=0.15in, label={\tiny$\bullet$}, topsep=4pt, itemsep=2pt, partopsep=0pt, parsep=0pt]}
+\newcommand{\resumeItemListEnd}{\end{itemize}}
+
 
 %-------------------------------------------
 %%%%%%  RESUME STARTS HERE  %%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -137,9 +136,8 @@
 
 \import{\sectiondir}{1_heading.tex} 
 \import{\sectiondir}{2_education.tex} 
-% \import{\sectiondir}{3_courses.tex} 
+\import{\sectiondir}{3_skills.tex}
 \import{\sectiondir}{4_experience.tex}
-\import{\sectiondir}{5_skills.tex}
 \import{\sectiondir}{6_leadership.tex} 
 \end{document}
 
