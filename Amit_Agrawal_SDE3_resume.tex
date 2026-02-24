@@ -31,7 +31,7 @@
 %----------FONT OPTIONS----------
 % Sans-serif
 % \usepackage[sfdefault]{FiraSans}
-% \usepackage[sfdefault]{roboto}
+\usepackage[sfdefault]{roboto}
 % \usepackage[default]{sourcesanspro}
 
 % Serif
@@ -40,8 +40,8 @@
 % \usepackage{charter}
 
 % Helvetica
-\usepackage{helvet}
-\renewcommand{\familydefault}{\sfdefault}
+% \usepackage{helvet}
+% \renewcommand{\familydefault}{\sfdefault}
 
 \usepackage{ragged2e} % Added for justified text
 \setlist[itemize]{label={\tiny$\bullet$}, leftmargin=*, topsep=4pt, itemsep=0pt, partopsep=0pt, parsep=0pt, before=\justifying, labelsep=0.3em}
@@ -56,7 +56,7 @@
 
 \setlength{\multicolsep}{-3.0pt}
 \setlength{\columnsep}{-1pt}
-\input{glyphtounicode}
+% \input{glyphtounicode} % Not needed for XeLaTeX (pdfTeX only)
 
 % Adjust margins
 \addtolength{\oddsidemargin}{-0.6in}
@@ -78,7 +78,8 @@
 \titlespacing*{\section}{0pt}{0pt}{4pt}
 
 % Ensure that generate pdf is machine readable/ATS parsable
-\pdfgentounicode=1
+% XeTeX generates Unicode PDFs by default, so \pdfgentounicode is not needed
+% \pdfgentounicode=1 % pdfTeX only - not needed for XeLaTeX
 
 
 %-------------------------
@@ -135,9 +136,9 @@
 \begin{document}
 
 \import{\sectiondir}{1_heading.tex} 
-\import{\sectiondir}{2_education.tex} 
 \import{\sectiondir}{3_skills.tex}
 \import{\sectiondir}{4_experience.tex}
+\import{\sectiondir}{2_education.tex} 
 \import{\sectiondir}{6_leadership.tex} 
 \end{document}
 
